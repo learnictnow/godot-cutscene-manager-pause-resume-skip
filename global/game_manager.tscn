@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bod50ylc1l8yk"]
+
+[ext_resource type="Script" path="res://global/game_manager.gd" id="1_btko4"]
+[ext_resource type="PackedScene" uid="uid://bg242xfpasl7a" path="res://pausemenu/pause_menu.tscn" id="2_4380f"]
+
+[node name="GameManager" type="Node"]
+script = ExtResource("1_btko4")
+lives = 3
+
+[node name="PauseMenu" parent="." instance=ExtResource("2_4380f")]
+visible = false

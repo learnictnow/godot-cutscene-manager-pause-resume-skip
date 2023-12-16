@@ -1,6 +1,6 @@
-extends Control
+extends Node3D
 
-signal pause_cutscene
+@export_file("*.tscn") var scene
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -12,12 +12,8 @@ func _process(delta):
 	pass
 
 
-func _on_button_pressed():
-	emit_signal("pause_cutscene")
-	print("Paused pressed")
+func _on_animation_player_animation_finished(anim_name):
+	if anim_name == "splash":
+		print("Animation Splash finished")
+		get_tree().change_scene_to_file(scene)
 	pass # Replace with function body.
-
-func _input(event):
-	if Input.is_action_just_pressed("pause"):
-		print("Paused - Pause pressed")
-		emit_signal("pause_cutscene")
