@@ -52,4 +52,5 @@ layout_mode = 2
 text = "Exit Game"
 
 [connection signal="pressed" from="CenterContainer/VBoxContainer/ButtonResume" to="." method="_on_button_resume_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ButtonMainMenu" to="." method="_on_button_main_menu_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/ButtonExit" to="." method="_on_button_exit_pressed"]

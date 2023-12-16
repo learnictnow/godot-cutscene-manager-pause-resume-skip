@@ -1,6 +1,6 @@
-[gd_scene load_steps=10 format=3 uid="uid://mdny58nd3c2t"]
+[gd_scene load_steps=11 format=3 uid="uid://mdny58nd3c2t"]
 
-[ext_resource type="Script" path="res://introduction_splash.gd" id="1_0edse"]
+[ext_resource type="Script" path="res://cutscene_pause_skip.gd" id="1_0edse"]
 
 [sub_resource type="SystemFont" id="SystemFont_uvn2p"]
 msdf_pixel_range = 128
@@ -39,10 +39,22 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector3(0, 0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Marker3D/MeshInstance3D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2, 2, 2)]
+}
 
 [sub_resource type="Animation" id="Animation_8krhl"]
 resource_name = "splash"
-length = 2.5
+length = 10.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -50,7 +62,7 @@ tracks/0/path = NodePath("Marker3D:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5),
+"times": PackedFloat32Array(0, 0.5, 3.1, 5, 8, 10),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(-0.848062, 0.713724, 0.713724), Vector3(-1.15787, 0.190236, 1.57674), Vector3(-0.967251, 1.5161, 0.280348), Vector3(-0.652924, 1.20137, -2.28967), Vector3(0, 0, 0)]
@@ -62,10 +74,22 @@ tracks/1/path = NodePath("Marker3D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2, 2.5),
+"times": PackedFloat32Array(0, 0.5, 2.1, 5, 8, 10),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Marker3D/MeshInstance3D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(10),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t1tie"]
@@ -81,9 +105,12 @@ _data = {
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_313qf"]
 albedo_color = Color(1, 0, 1, 1)
 
-[node name="IntroductionSplash" type="Node3D"]
+[sub_resource type="Environment" id="Environment_pcd3u"]
+background_mode = 1
+
+[node name="CutscenePauseSkipExample" type="Node3D"]
 script = ExtResource("1_0edse")
-scene = "res://TeamMember1/start_menu.tscn"
+scene = "res://startmenu/start_menu.tscn"
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.875, -0.433013, 0.216506, 0.216506, 0.75, 0.625, -0.433013, -0.5, 0.75, -1, 4, 6)
@@ -101,6 +128,7 @@ autoplay = "splash"
 [node name="Marker3D" type="Marker3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Marker3D"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 mesh = SubResource("BoxMesh_4g23x")
 skeleton = NodePath("../..")
 surface_material_override/0 = SubResource("StandardMaterial3D_ch0ak")
@@ -146,5 +174,18 @@ surface_material_override/0 = SubResource("StandardMaterial3D_313qf")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, -2, 0)
 mesh = SubResource("BoxMesh_4g23x")
 skeleton = NodePath("../..")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(0.821089, 0, -0.5708, 0, 1, 0, 0.5708, 0, 0.821089, -6.56227, 0, 4.15608)
+light_color = Color(1, 0, 0.0901961, 1)
+light_energy = 7.949
+spot_range = 11.3769
+spot_angle = 73.0223
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pcd3u")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

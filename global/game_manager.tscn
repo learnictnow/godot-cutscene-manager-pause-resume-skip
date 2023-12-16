@@ -5,6 +5,7 @@
 
 [node name="GameManager" type="Node"]
 script = ExtResource("1_btko4")
+main_menu = "res://startmenu/start_menu.tscn"
 lives = 3
 
 [node name="PauseMenu" parent="." instance=ExtResource("2_4380f")]

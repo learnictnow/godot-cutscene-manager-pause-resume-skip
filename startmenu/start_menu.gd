@@ -4,6 +4,7 @@ extends Control
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	pass # Replace with function body.
 
 
@@ -15,4 +16,9 @@ func _process(delta):
 func _on_button_play_pressed():
 	print("Play pressed")
 	get_tree().change_scene_to_file(scene)
+	pass # Replace with function body.
+
+
+func _on_button_exit_pressed():
+	GameManager.quit_game()
 	pass # Replace with function body.

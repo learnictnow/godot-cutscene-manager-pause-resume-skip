@@ -22,3 +22,9 @@ func _on_button_exit_pressed():
 	print("Exit pressed")
 	GameManager.quit_game()
 	pass # Replace with function body.
+
+
+func _on_button_main_menu_pressed():
+	hide()
+	GameManager.display_main_menu()
+	pass # Replace with function body.
