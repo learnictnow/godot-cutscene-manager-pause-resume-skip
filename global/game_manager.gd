@@ -22,6 +22,10 @@ func _process(delta):
 			menu_displayed = true
 			pausemenu.visible = true
 			get_tree().paused = true
+		elif pausemenu.visible:
+			menu_displayed = false
+			pausemenu.visible = false
+			get_tree().paused = false
 	pass
 
 func quit_game():
@@ -31,3 +35,6 @@ func display_main_menu():
 	menu_displayed = true
 	get_tree().paused = false
 	get_tree().change_scene_to_file(main_menu)
+
+func skip_scene(scene):
+	get_tree().change_scene_to_file(scene)
